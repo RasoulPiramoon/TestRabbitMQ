@@ -1,0 +1,79 @@
+﻿@page
+<form id="addForm" method="post" action="@Url.Action("Create", "Home")">
+    @*<label for="Name">Name:</label><br>
+        <input type="text" id="Name" name="Name"><br>*@
+    <div class="row">
+        <div class="col-6">
+            <label for="Id" style="width: 70px;">Id</label>
+            <input type="text" value="1" id="Id" name="Id" style="width: 70%;" />
+        </div>
+        <div class="col-6">
+            <label for="Code" style="width: 70px;">Code</label>
+            <input type="text" value="1" id="Code" name="Code" style="width: 70%;" />
+        </div>
+        <div class="col-6">
+            <label for="Name" style="width: 70px;">Name</label>
+            <input type="text" value="کالای تست" id="Name" name="Name" style="width: 70%;" />
+        </div>
+        <div class="col-6">
+            <label for="Barcode" style="width: 70px;">Barcode</label>
+            <input type="text" value="6269583651000" id="Barcode" name="Barcode" style="width: 70%;" />
+        </div>
+        <div class="col-6">
+            <label for="Comment" style="width: 70px;">Comment</label>
+            <input type="text" value="Test Comment" id="Comment" name="Comment" style="width: 70%;" />
+        </div>
+        <div class="col-6">
+            <label for="ClientId" style="width: 70px;">ClientId</label>
+            <input type="text" value="119" id="ClientId" name="ClientId" style="width: 70%;" />
+        </div>
+        <div class="col-6">
+            <label for="IsActive" style="width: 70px;">IsActive</label>
+            <input type="checkbox" checked id="IsActive" name="IsActive" value="true" style="width: 70%;" />
+        </div>
+        <div class="col-8" style="margin-top: 25px;">
+            <input type="button" id="sendToRabbit" value="Publish" />
+            @*<input type="button" id="send50000ToRabbit" value="Send 50000 Object to rabbit" />*@
+            <input type="button" id="send50000ToRabbit" value="Publish 50000" />
+        </div>
+    </div>
+</form>
+
+<script src="~/js/SendMessage.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#sendToRabbit").click(function () {
+        ////form encoded data
+        var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
+        var data = $('#addForm').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/Home/Create',
+            dataType: 'json',
+            contentType: dataType,
+            data: data,
+            success: function (result) {
+                console.log('Data received: ');
+                console.log(result);
+            }
+        });
+    });
+
+
+    $("#send50000ToRabbit").click(function () {
+        ////form encoded data
+        var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
+        var data = $('#addForm').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/Home/Create50000',
+            dataType: 'json',
+            contentType: dataType,
+            data: data,
+            success: function (result) {
+                console.log('Data received: ');
+                console.log(result);
+            }
+        });
+    });
+</script>
